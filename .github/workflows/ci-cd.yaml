@@ -18,7 +18,7 @@ env:
 # =====================================================
 jobs:
   ci:
-    name: CI - Build, Scan, Image, GitOps
+    name: CI - Build, Scan, Image
     runs-on: ubuntu-latest
 
     steps:
