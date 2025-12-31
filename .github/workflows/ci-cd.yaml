@@ -9,7 +9,8 @@ permissions:
   contents: write
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: selfhosted-hosted
     
     env:
       REGISTRY: docker.io
@@ -100,7 +101,7 @@ jobs:
       # === Deploy to K8s using Ansible ===
       - name: Set up Ansible
         run: |
-          sudo apt-get update && sudo apt-get install -y ansible
+          sudo yum update && sudo yum install -y ansible
           python -m pip install --upgrade pip
           pip install ansible kubernetes 
           
