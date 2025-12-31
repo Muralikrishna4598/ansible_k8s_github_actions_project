@@ -75,6 +75,9 @@ jobs:
           severity: CRITICAL,HIGH
           ignore-unfixed: true
           exit-code: 1
+        env:
+          TRIVY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          TRIVY_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       # -------------------------------
       # Checkout Full Git History
