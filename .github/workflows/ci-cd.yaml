@@ -66,10 +66,21 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
 
       # -------------------------------
+      # Wait for Docker Image Availability
+      # # -------------------------------
+      - name: Wait for Docker Image Availability
+        run: |
+          for i in {1..10}; do
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }} && break
+            echo "Waiting for image..."
+            sleep 10
+          done
+
+      # -------------------------------
       # Trivy Image Scan (Security Gate)
       # # -------------------------------
       - name: Scan Docker Image with Trivy
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
           severity: CRITICAL,HIGH
